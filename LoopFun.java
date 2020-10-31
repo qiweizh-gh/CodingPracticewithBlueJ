@@ -10,7 +10,13 @@ public class LoopFun
        * @return the factorial of the number
        */
       public Integer factorial(Integer number){
-          return null;
+          // Assumption: the result of factorial will not be out of range
+          if (number == null || number < 0) return null;
+          int res = 1;
+          while (number > 0) {
+              res *= number--;
+          }
+          return res;
       }
 
       /**
@@ -21,7 +27,21 @@ public class LoopFun
        * @return Upper case string of the first letter of each word
        */
       public String acronym(String phrase) {
-          return null;
+          // Assumption: there are only English characters(a-z, A-Z) 
+          //            in the phrase
+          if (phrase == null) return null;
+          char[] arr = phrase.toCharArray();
+          StringBuilder sb = new StringBuilder();
+          for (int i = 0; i < arr.length; i++) {
+              if (arr[i] == ' ') continue;
+              if (i == 0 || arr[i - 1] == ' ') {
+                  if (arr[i] >= 'a' && arr[i] <= 'z') {
+                      arr[i] = (char)(arr[i] - 'a' + 'A');
+                  }
+                  sb.append(arr[i]);
+              }
+          }
+          return sb.toString();
       }
 
       /**
@@ -37,6 +57,17 @@ public class LoopFun
        * @return the encrypted string by shifting each character by three character
        */
       public String encrypt(String word) {
-          return null;
+          // Assumption: there are only English characters(a-z/A-Z, Uppercase/Lowercase) 
+          //            in the word
+          if (word == null) return null;
+          StringBuilder sb = new StringBuilder();
+          char[] arr = word.toCharArray();
+          for (char ch : arr) {
+              int cur = ch + 3;
+              if ((ch >= 'a' && ch <= 'z' && cur > 'z')
+                    || (ch >= 'A' && ch <= 'Z' && cur > 'Z')) cur -= 26;
+              sb.append((char) cur);
+          }
+          return sb.toString();
       }
 }
